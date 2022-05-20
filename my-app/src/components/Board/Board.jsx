@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ToDo from "../ToDo/ToDo";
 import ToDoForm from "../ToDoForm/ToDoForm";
-import styles from "../Panel/Panel.module.css";
+import styles from "../Board/Board.module.css";
 
-const Panel = function (props) {
+const Board = function (props) {
   const [todos, setTodos] = useState(props.data ? props.data : []);
 
   const addTask = (userInput) => {
@@ -30,7 +30,7 @@ const Panel = function (props) {
   };
 
   return (
-    <div className={styles.panel}>
+    <div className={styles.board}>
       <div className={styles.title}>{props.title}</div>
       {todos.map((todo) => {
         return (
@@ -49,4 +49,4 @@ const Panel = function (props) {
   );
 };
 
-export default Panel;
+export default Board;

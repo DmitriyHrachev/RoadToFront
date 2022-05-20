@@ -1,4 +1,6 @@
-import Panel from "./components/Panel/Panel";
+import Board from "./components/Board/Board";
+import { useState } from "react";
+import BoardForm from "./components/BoardForm/BoardForm";
 
 const todoList1 = [
   {
@@ -19,11 +21,34 @@ const todoList1 = [
 ];
 
 function App() {
+  const [boards, setBoards] = useState([
+    { id: 1, title: "Todo", data: todoList1 },
+  ]);
+
+  const addPanel = (boardInput) => {
+    if (boardInput) {
+      const newPanel = {
+        id: Date.now(),
+        title: boardInput,
+        data: [],
+      };
+      setBoards([...boards, newPanel]);
+    }
+  };
+
   return (
     <div className="App">
       <div className="grid">
-        <Panel data={todoList1} title="Todo" />
-        <Panel title="Someday" />
+        {boards.map((panel) => {
+          return (
+            <div className="col" key={panel.id}>
+              <Board key={panel.id} title={panel.title} data={panel.data} />
+            </div>
+          );
+        })}
+        <div className="col">
+          <BoardForm addPanel={addPanel} />
+        </div>
       </div>
     </div>
   );

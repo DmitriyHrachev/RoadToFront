@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -17,6 +20,11 @@ code {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 30px;
   padding: 5%;
+  margin: 0 -15px -30px;
+}
+
+.col {
+  width: calc(100% / 3);
+  padding: 0 15px 30px;
 }
