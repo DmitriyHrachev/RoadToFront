@@ -1,6 +1,6 @@
 import styles from "./ToDo.module.css";
 
-function ToDo({ todo, toggleTask, removeTask }) {
+function ToDo({ todo, toggleTask, removeTask, boardId }) {
   return (
     <div
       key={todo.id}
@@ -8,12 +8,12 @@ function ToDo({ todo, toggleTask, removeTask }) {
         todo.complete ? styles.item + " " + styles.checked : styles.item
       }
     >
-      <div className={styles.body} onClick={() => toggleTask(todo.id)}>
+      <div className={styles.body} onClick={() => toggleTask(boardId, todo.id)}>
         <div className={styles.marker}></div>
         <div className={styles.task}>{todo.task}</div>
       </div>
 
-      <div onClick={() => removeTask(todo.id)}>
+      <div onClick={() => removeTask(boardId, todo.id)}>
         <svg
           width="15"
           height="15"

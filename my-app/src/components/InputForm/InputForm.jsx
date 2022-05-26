@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styles from "../ToDoForm/ToDoForm.module.css";
+import styles from "./InputForm.module.css";
 
-function ToDoForm({ addTask }) {
+function InputForm({ onSubmit, placeholder, boardId }) {
   const [userInput, setUserInput] = useState("");
 
   const handleChange = (e) => {
@@ -10,7 +10,7 @@ function ToDoForm({ addTask }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask(userInput);
+    onSubmit(userInput, boardId);
     setUserInput("");
   };
 
@@ -27,7 +27,7 @@ function ToDoForm({ addTask }) {
         value={userInput}
         onChange={handleChange}
         onKeyDown={handleKeyPress}
-        placeholder="Add new task"
+        placeholder={placeholder}
         className={styles.input}
       />
       {/* <button>Сохранить</button> */}
@@ -35,4 +35,4 @@ function ToDoForm({ addTask }) {
   );
 }
 
-export default ToDoForm;
+export default InputForm;

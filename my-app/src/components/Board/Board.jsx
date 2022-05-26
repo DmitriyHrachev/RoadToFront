@@ -1,37 +1,19 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import ToDo from "../ToDo/ToDo";
-import ToDoForm from "../ToDoForm/ToDoForm";
+import InputForm from "../InputForm/InputForm";
 import styles from "../Board/Board.module.css";
 
-const Board = function (props) {
-  const [todos, setTodos] = useState(props.data ? props.data : []);
-
-  const addTask = (userInput) => {
-    if (userInput) {
-      const newItem = {
-        id: Date.now(),
-        task: userInput,
-        complete: false,
-      };
-      setTodos([...todos, newItem]);
-    }
-  };
-
-  const removeTask = (id) => {
-    setTodos([...todos.filter((todo) => todo.id !== id)]);
-  };
-
-  const handleToggle = (id) => {
-    setTodos([
-      ...todos.map((todo) =>
-        todo.id === id ? { ...todo, complete: !todo.complete } : { ...todo }
-      ),
-    ]);
-  };
-
+const Board = function ({
+  id,
+  title,
+  todos,
+  handleToggle,
+  removeTask,
+  addTask,
+}) {
   return (
     <div className={styles.board}>
-      <div className={styles.title}>{props.title}</div>
+      <div className={styles.title}>{title}</div>
       {todos.map((todo) => {
         return (
           <ToDo
@@ -39,11 +21,16 @@ const Board = function (props) {
             todo={todo}
             toggleTask={handleToggle}
             removeTask={removeTask}
+            boardId={id}
           />
         );
       })}
       <div className={styles.form}>
-        <ToDoForm addTask={addTask} />
+        <InputForm
+          onSubmit={addTask}
+          boardId={id}
+          placeholder="Add new task..."
+        />
       </div>
     </div>
   );
